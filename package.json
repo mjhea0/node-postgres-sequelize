@@ -11,6 +11,10 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "morgan": "~1.6.1",
+    "pg": "^4.4.3",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.12.2",
+    "sequelize-cli": "^2.1.0",
     "serve-favicon": "~2.3.0",
     "swig": "^1.4.2"
   },
