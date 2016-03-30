@@ -10,6 +10,7 @@ var swig = require('swig');
 
 // *** routes *** //
 var routes = require('./routes/index.js');
+var leaveRoutes = require('./routes/leaveIndex.js');
 
 
 // *** express instance *** //
@@ -37,6 +38,7 @@ app.use('/bower_components', express.static(path.join(__dirname, '../bower_compo
 
 // *** main routes *** //
 app.use('/', routes);
+app.use('/leave', leaveRoutes);
 
 
 // catch 404 and forward to error handler
