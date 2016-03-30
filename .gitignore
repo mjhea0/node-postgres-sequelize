@@ -1,4 +1,15 @@
 node_modules/
+bower_components/
 .DS_Store
 npm-debug.log
 blog.md
+_SpecRunner_*.html
+# Ignore tmp files
+*~
+
+# Ignore personal dev files
+.allow-devtools-edit
+/.settings/org.eclipse.core.resources.prefs
+/.project
+
+

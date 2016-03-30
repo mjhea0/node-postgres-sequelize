@@ -1,17 +1,8 @@
-/**
- * Module Dependencies
- */
-
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var nodemon = require('gulp-nodemon');
-
-
-/**
- * Config
- */
 
 var paths = {
   styles: [
@@ -31,10 +22,6 @@ var nodemonConfig = {
   ignore: ['node_modules']
 };
 
-
-/**
- * Gulp Tasks
- */
 
 gulp.task('lint', function() {
   return gulp.src(paths.scripts)
