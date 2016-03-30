@@ -37,7 +37,8 @@ app.use('/bower_components', express.static(path.join(__dirname, '../bower_compo
 
 
 // *** main routes *** //
-app.use('/', leaveRoutes);
+app.use('/', routes);
+app.use('/leave', leaveRoutes);
 
 
 // catch 404 and forward to error handler
