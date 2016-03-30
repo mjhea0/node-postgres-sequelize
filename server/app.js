@@ -10,7 +10,7 @@ var swig = require('swig');
 
 // *** routes *** //
 var routes = require('./routes/index.js');
-
+var conferenceRoutes = require('./../Conference-room-booking/server/routes/conferenceRoute.js');
 
 // *** express instance *** //
 var app = express();
@@ -37,6 +37,7 @@ app.use('/bower_components', express.static(path.join(__dirname, '../bower_compo
 
 // *** main routes *** //
 app.use('/', routes);
+app.use('/conference', conferenceRoutes);
 
 
 // catch 404 and forward to error handler

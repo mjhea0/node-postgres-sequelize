@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "admin",
-    "database": "sample",
+    "database": "conferenceRooms",
     "host": "172.25.67.20",
     "dialect": "postgres"
   },
