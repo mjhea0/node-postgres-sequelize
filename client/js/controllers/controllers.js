@@ -13,6 +13,7 @@ angular.module('postgreDbApp.controllers', [])
 	getTodosService.getTodos()
 		.then(function(answer) {
 			$scope.todos = answer;
+			$scope.user = answer[0].User;
 		},
 		function(error) {
 			console.log("OOPS!!!! " + JSON.stringify(error));
