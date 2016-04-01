@@ -1,7 +1,10 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Employee = sequelize.define('Employee', {
-    EmployeeId: DataTypes.STRING,
+    empCode: {
+    	type: DataTypes.INTEGER,
+    	primaryKey: true
+    },
     empName: DataTypes.STRING,
     loginName: DataTypes.STRING,
     joinDate: DataTypes.STRING,

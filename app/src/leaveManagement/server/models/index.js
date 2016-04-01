@@ -30,10 +30,11 @@ Object.keys(db).forEach(function(modelName) {
     db[modelName].associate(db);
   }
 });
-
-sequelize.sync({force: true}).then(function(){
-	
-});
+sequelize.sync({
+	 'force' : false
+	}).then(function() {
+	 console.log("db sync");
+	});
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

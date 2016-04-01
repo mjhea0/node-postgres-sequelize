@@ -10,19 +10,12 @@ module.exports = function(sequelize, DataTypes) {
     reason: DataTypes.STRING,
     approver: DataTypes.STRING,
     isStartHalf: DataTypes.BOOLEAN,
-    isEndHalf: DataTypes.BOOLEAN,
-    EmployeeId: {
-    	type: DataTypes.STRING,
-    references: {
-        model: "Employee",
-        key: "EmployeeId"
-      }
-    }
+    isEndHalf: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-    	  LeaveTxn.belongsTo(models.Employee, {foreignKey: 'EmployeeId', targetKey: 'EmployeeId'});  
+    	  LeaveTxn.belongsTo(models.Employee, {foreignKey: 'EmployeeEmpCode', targetKey: 'empCode'});  
       }
     }
   });

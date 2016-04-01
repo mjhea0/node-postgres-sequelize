@@ -19,11 +19,23 @@ router.get('/api/employee', function(req, res) {
 router.get('/api/leaveList/:empId', function(req, res) {
 	models.LeaveTxn.findAll({
 	    where: {
-	      EmployeeId: req.params.empId
+	      EmployeeEmpCode: req.params.empId
 	    }
 	}).then(function(leave) {
 		res.json(leave);
     });
+});
+
+//get Employee details with leave details
+router.get('/api/employee/:id', function(req, res) {
+	models.Employee.find({
+		where: {
+			empCode: req.params.id
+		},
+		include: [ models.LeaveTxn]
+	}).then(function(employee) {
+		res.json(employee);
+	});
 });
 
 //add new leave
@@ -34,29 +46,29 @@ router.use('/api/leave', function(req, res, next) {
 	var endDate = new Date(req.body.endDate);
 	var startHalf = req.body.startHalf;
 	var endHalf = req.body.endHalf;
+	var leaveType = req.body.leaveType;
 	
 	var days = moment(endDate).diff(startDate, 'days');
 	console.log(days);
 	
-	if(!isStartHalf && !isEndHalf) {
-		console.log("no");
-		req.body.leaveDays = days+1;
-	} else if(isStartHalf && isEndHalf) {
-		console.log("yes");
-		req.body.leaveDays = 1/startHalf + endHalf/2 + days -1;
-	} else if(isStartHalf && !isEndHalf) {
-		console.log("1 yes");
-		req.body.leaveDays = 1/startHalf + days;
-	} else if(!isStartHalf && isEndHalf) {
-		console.log("1 no");
-		req.body.leaveDays = endHalf/2 + days;
+	if(leaveType == 'FH') {
+		req.body.leaveDays = 1;
+	} else {
+		if(!isStartHalf && !isEndHalf) {
+			req.body.leaveDays = days+1;
+		} else if(isStartHalf && isEndHalf) {
+			req.body.leaveDays = 1/startHalf + endHalf/2 + days -1;
+		} else if(isStartHalf && !isEndHalf) {
+			req.body.leaveDays = 1/startHalf + days;
+		} else if(!isStartHalf && isEndHalf) {
+			req.body.leaveDays = endHalf/2 + days;
+		}
 	}
-	console.log("req.body.leaveDays "+ req.body.leaveDays);
 	  next();
 	  
 	});
+
 router.post('/api/leave', function(req, res) {
-	console.log("in post fxn");
 	models.LeaveTxn.create({
 	leaveType: req.body.leaveType,
 	startDate: req.body.startDate,
@@ -68,11 +80,11 @@ router.post('/api/leave', function(req, res) {
 	phoneNo: req.body.phoneNo,
 	reason: req.body.reason,
 	approver: req.body.approver,
-	EmployeeId: req.body.EmployeeId
+	EmployeeEmpCode: req.body.empCode
   }).then(function(emp) {
 	  models.Employee.find({
 		    where: {
-		      EmployeeId: req.body.EmployeeId
+		    	empCode: req.body.empCode
 		    }
 	 }).then(function(emp) {
 		 if(emp) {
@@ -92,6 +104,8 @@ router.post('/api/leave', function(req, res) {
 			 }
 			 if(leaveType == 'FH') {
 				 floatLeaves = emp.empFH - leaveDays;
+			 } else {
+				 floatLeaves = emp.empFH;
 			 }
 			 
 			 emp.updateAttributes({
@@ -100,6 +114,15 @@ router.post('/api/leave', function(req, res) {
 			 	empFH: floatLeaves
 			}); 
 		 }
+	}).then(function() {
+		models.Employee.find({
+			where: {
+				empCode: req.body.empCode
+			},
+			include: [ models.LeaveTxn]
+		}).then(function(employee) {
+			res.json(employee);
+		});
 	});
   });
 });
