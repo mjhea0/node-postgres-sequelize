@@ -6,22 +6,36 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+//get all todos of user
+router.get('/api/user/:userId', function(req, res) {
+  models.User.findAll({
+      where: {
+    	  userCode: req.params.userId
+	  }, include: [ models.Todo]
+  }).then(function(todos) {
+      res.json(todos);
+  });
+});
+
 // get all todos
-router.get('/api/todos', function(req, res) {
-  models.Todo.findAll({}).then(function(todos) {
+router.get('/api/todos/:userId', function(req, res) {
+  models.Todo.findAll({
+		where: {
+			userCode: req.params.userId
+	    }, include: [ models.User]
+  }).then(function(todos) {
     res.json(todos);
   });
 });
 
 // add new todo
 router.post('/api/todos', function(req, res) {
+	var userIdFromParam = req.body.userEmpCode;
 	models.Todo.create({
-    title: req.body.title,
-    UserId: req.body.user_id
-  }).then(function(todo) {
-	  models.Todo.findAll({}).then(function(todos) {
-	      res.json(todos);
-	  });
+		title: req.body.title,
+		userCode: userIdFromParam
+	}).then(function(todo) {
+		res.json(todo.dataValues);
   });
 });
 

@@ -6,13 +6,17 @@ var nodemon = require('gulp-nodemon');
 
 var paths = {
   styles: [
-    './client/css/*.css',
+    './app/src/todo/client/css/*.css',
+    './app/src/roomBooking/client/css/*.css',
+    './app/src/leaveManagement/client/css/*.css',
   ],
   scripts: [
-    './client/js/*.js',
+	'./app/src/todo/client/js/*.js',
+	'./app/src/roomBooking/client/js/*.js',
+	'./app/src/leaveManagement/client/js/*.js',
   ],
   server: [
-    './server/bin/www'
+    './appServer/bin/www'
   ]
 };
 
