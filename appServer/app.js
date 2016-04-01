@@ -9,9 +9,9 @@ var swig = require('swig');
 
 
 // *** routes *** //
-var routes = require('./routes/index.js');
-var conferenceRoutes = require('./../Conference-room-booking/server/routes/conferenceRoute.js');
-var leaveRoutes = require('./routes/leaveIndex.js');
+var todoRoutes = require('./../app/src/todo/server/routes/index.js');
+var conferenceRoutes = require('./../app/src/roomBooking/server/routes/index.js');
+var leaveRoutes = require('./../app/src/leaveManagement/server/routes/index.js');
 
 // *** express instance *** //
 var app = express();
@@ -24,7 +24,9 @@ app.set('view engine', 'html');
 
 
 // *** static directory *** //
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../app/src/leaveManagement/client/views'));
+app.set('views', path.join(__dirname, '../app/src/roomBooking/client/views'));
+app.set('views', path.join(__dirname, '../app/src/todo/client/'));
 
 
 // *** config middleware *** //
@@ -32,12 +34,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../client')));
+app.use(express.static(path.join(__dirname, '../app/src/leaveManagement/client')));
+app.use(express.static(path.join(__dirname, '../app/src/roomBooking/client')));
+app.use(express.static(path.join(__dirname, '../app/src/todo/client')));
 app.use('/bower_components', express.static(path.join(__dirname, '../bower_components')));
 
 
 // *** main routes *** //
-app.use('/', routes);
+app.use('/todo', todoRoutes);
 app.use('/conference', conferenceRoutes);
 app.use('/leave', leaveRoutes);
 
@@ -57,10 +61,6 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
   });
 }
 
@@ -68,11 +68,6 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
 });
-
 
 module.exports = app;

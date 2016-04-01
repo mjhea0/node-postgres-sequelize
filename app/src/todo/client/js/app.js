@@ -3,7 +3,7 @@ angular.module('postgreDbApp', ['ngRoute', 'postgreDbApp.controllers', 'postgreD
 .config(function ($routeProvider, $locationProvider) {
 	
 	$routeProvider
-    .when('/', {
+    .when('/todo', {
         templateUrl: 'views/main.tpl.html',
         controller: 'MainCtrl',
         reloadOnSearch: false

@@ -7,7 +7,7 @@ angular.module('postgreDbApp.services', [])
     	    
         	var deferred = $q.defer();
 
-            $http.get('/api/todos/')
+            $http.get('/todo/api/todos/9564')
             .success(function(data) {
             	deferred.resolve(data);
             })
@@ -25,8 +25,8 @@ angular.module('postgreDbApp.services', [])
         	
         	var deferred = $q.defer();
         	
-        	todo.user_id = 1;
-            $http.post('/api/todos/', todo)
+        	todo.userEmpCode = 9564;
+            $http.post('/todo/api/todos/', todo)
             .success(function(data) {
             	deferred.resolve(data);
             })
@@ -44,7 +44,7 @@ angular.module('postgreDbApp.services', [])
     	    
         	var deferred = $q.defer();
 
-            $http.put('/api/todos/' + id, updateData)
+            $http.put('/todo/api/todos/' + id, updateData)
             .success(function(data) {
             	console.log("Success");//TEST
             	deferred.resolve(data);
@@ -64,7 +64,7 @@ angular.module('postgreDbApp.services', [])
     	    
         	var deferred = $q.defer();
 
-            $http.delete('/api/todos/' + id)        
+            $http.delete('/todo/api/todos/' + id)        
             .success(function(data) {
             	deferred.resolve(data);
             })
@@ -74,4 +74,22 @@ angular.module('postgreDbApp.services', [])
             return deferred.promise
         }
     } 
+})
+
+.factory('getUserService', function($http, $q) {
+    return {
+        getUser: function() {
+    	    
+        	var deferred = $q.defer();
+
+            $http.get('/todo/api/user/9564')
+            .success(function(data) {
+            	deferred.resolve(data);
+            })
+            .error(function(reason) {
+            	deferred.reject(reason);
+            });
+            return deferred.promise
+        }
+    };
 });

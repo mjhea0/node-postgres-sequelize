@@ -1,16 +1,30 @@
 'use strict';
 
 angular.module('postgreDbApp.controllers', [])
-.controller('MainCtrl', function($scope, $q, getTodosService, 
+.controller('MainCtrl', function($scope, $q, getUserService, getTodosService, 
 	createTodoService, updateTodoService, deleteTodoService) {
 
 	$scope.formData = {};
 	$scope.todos={};
 
 	/*
+	 * Get Todos from user
+	 */
+	getUserService.getUser()
+		.then(function(answer) {
+			console.log(answer);
+			$scope.user = answer[0];
+			$scope.todos = answer[0].Todos;
+		},
+		function(error) {
+			console.log("OOPS!!!! " + JSON.stringify(error));
+		}
+  	);
+	
+	/*
 	 * Get Todos
 	 */
-	getTodosService.getTodos()
+	/*getTodosService.getTodos()
 		.then(function(answer) {
 			$scope.todos = answer;
 			$scope.user = answer[0].User;
@@ -18,7 +32,7 @@ angular.module('postgreDbApp.controllers', [])
 		function(error) {
 			console.log("OOPS!!!! " + JSON.stringify(error));
 		}
-  	);
+  	);*/
 
 
 	/*
@@ -27,7 +41,7 @@ angular.module('postgreDbApp.controllers', [])
 	$scope.createTodo = function() {
 		createTodoService.createTodo($scope.formData)
 			.then(function(answer) {
-				$scope.todos = answer;
+				$scope.todos.push(answer);
 				$scope.formData.title = '';
 			},
 			function(error) {
