@@ -23,27 +23,19 @@ app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
 
 
-// *** static directory *** //
-app.set('views', path.join(__dirname, '../app/src/leaveManagement/client/views'));
-app.set('views', path.join(__dirname, '../app/src/roomBooking/client/views'));
-app.set('views', path.join(__dirname, '../app/src/todo/client/'));
-
-
 // *** config middleware *** //
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../app/src/leaveManagement/client')));
-app.use(express.static(path.join(__dirname, '../app/src/roomBooking/client')));
-app.use(express.static(path.join(__dirname, '../app/src/todo/client')));
+app.use(express.static(path.join(__dirname, '../app/src')));
 app.use('/bower_components', express.static(path.join(__dirname, '../bower_components')));
 
 
 // *** main routes *** //
 app.use('/todo', todoRoutes);
-app.use('/conference', conferenceRoutes);
-app.use('/leave', leaveRoutes);
+app.use('/roombooking', conferenceRoutes);
+app.use('/leaveManagement', leaveRoutes);
 
 
 // catch 404 and forward to error handler

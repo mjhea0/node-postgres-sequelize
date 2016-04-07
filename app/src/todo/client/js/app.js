@@ -4,12 +4,12 @@ angular.module('postgreDbApp', ['ngRoute', 'postgreDbApp.controllers', 'postgreD
 	
 	$routeProvider
     .when('/todo', {
-        templateUrl: 'views/main.tpl.html',
+        templateUrl: 'todo/client/views/main.tpl.html',
         controller: 'MainCtrl',
         reloadOnSearch: false
     })
     .otherwise({
-        redirectTo: '/'
+        redirectTo: '/todo'
     });
       
     $locationProvider.html5Mode({

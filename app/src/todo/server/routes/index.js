@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var path = require('path');
 var models = require('../models/index');
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+	res.sendFile('index.html', { root : path.join(__dirname, './../../client')});
 });
 
 //get all todos of user

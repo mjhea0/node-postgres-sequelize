@@ -1,0 +1,20 @@
+{
+   "capacity":3,
+   "priority1Facility":"22",
+   "priority2Facility":"",
+   "timeHours":"3",
+   "timeMinutes":"30",
+   "timeCycle":"PM",
+   "durationHours":"1",
+   "durationMinutes":"15",
+   "purpose":"31",
+   "dateValue":"04/05/2016",
+   "meetingSubject":"Meeting",
+   "locations":[
+      "12",
+      "13"
+   ],
+   "facilities":[
+      "22"
+   ]
+}
