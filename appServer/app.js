@@ -24,9 +24,9 @@ app.set('view engine', 'html');
 
 
 // *** static directory *** //
-app.set('views', path.join(__dirname, '../app/src/leaveManagement/client/views'));
-app.set('views', path.join(__dirname, '../app/src/roomBooking/client/views'));
-app.set('views', path.join(__dirname, '../app/src/todo/client/'));
+app.set('views', path.join(__dirname, '../app/src/leaveManagement/Kj_Leave_Application/views'));
+//app.set('views', path.join(__dirname, '../app/src/roomBooking/client/views'));
+//app.set('views', path.join(__dirname, '../app/src/todo/client/'));
 
 
 // *** config middleware *** //
@@ -34,15 +34,15 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../app/src/leaveManagement/client')));
-app.use(express.static(path.join(__dirname, '../app/src/roomBooking/client')));
-app.use(express.static(path.join(__dirname, '../app/src/todo/client')));
+app.use(express.static(path.join(__dirname, '../app/src/leaveManagement/Kj_Leave_Application')));
+//app.use(express.static(path.join(__dirname, '../app/src/roomBooking/client')));
+//app.use(express.static(path.join(__dirname, '../app/src/todo/client')));
 app.use('/bower_components', express.static(path.join(__dirname, '../bower_components')));
 
 
 // *** main routes *** //
-app.use('/todo', todoRoutes);
-app.use('/conference', conferenceRoutes);
+//app.use('/todo', todoRoutes);
+//app.use('/conference', conferenceRoutes);
 app.use('/leave', leaveRoutes);
 
 
