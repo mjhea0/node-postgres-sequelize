@@ -1,0 +1,64 @@
+h2 {
+	border-bottom: 2px solid #CCC;
+	padding-bottom: 4px;
+	margin-bottom: 25px;
+}
+h4 {
+	border-bottom: 2px solid #DDD;
+	padding-bottom: 2px;
+	margin-bottom: 10px;
+}
+span.required {
+	color: red;
+}
+ul {
+	list-style-type: none;
+	margin: 0 0 0 10px ;
+}
+ul li {
+	display: inline;
+}
+.divider {
+	border-bottom: 1px solid #DDD;
+	margin-bottom: 15px;
+}
+label.field-name {
+	display: block;
+}
+.row.collapse .right-spacing {
+	padding-right: 30px;
+}
+.priority-select {
+	display: inline;
+	width: 45%;
+	margin-right: 10px;
+}
+.duration-select {
+	display: inline;
+	margin-right: 10px;
+	width: 20%;
+}
+.field-label {
+	margin-right: 20px;
+}
+button {
+	margin-right: 10px;
+	height:40px;
+	padding: 9px 36px;
+}
+span.error-message {
+	position: relative;
+	top: -14px;
+	color: #d44950;
+	font-size:12px;
+}
+section.search-result {
+	margin:30px 15px;
+}
+.rooms-list {
+	width: 100%;
+	margin-top: 10px;
+}
+a.disabled-link {
+	cursor: not-allowed;
+}

@@ -1,0 +1,86 @@
+body{
+	background-color: ghostwhite;
+}
+.text-center {
+	text-align: center;
+	padding-top: 100px;
+	padding-bottom: 100px;
+}
+.btnSubmit {
+	color: #000;
+}
+.formbtn {
+	margin-top: 15px;
+	width: 150px;
+}
+.error {
+	color: red;
+  font-size: 18px;
+}
+.backLink {
+	float: right;
+	padding-right: 16px;
+    color: #FFFAF4;
+}
+#btngrey {
+	background-color: #EEEEEE;
+	border-color: #EEEEEE;
+}
+.round {
+	border-radius: 10px;
+	margin: 30px;
+}
+/*#clearMargin {
+	margin:0px;
+}*/
+.marginBottom {
+	margin-bottom: 25px;
+}
+.form-group {
+	right: 420px;
+	top: 120px;
+	display: inline-flex;
+	float: right;
+}
+.alignCenter {
+	text-align: center;
+	margin-top: -30px;
+}
+th {
+	text-align: center;
+}
+.form-control {
+	margin-right: 10px;
+}
+.backBtn {
+	padding-right: 0px;
+	float: right;
+	margin-right: 15px;
+}
+.inputbox {
+	display:inline-block;
+	top:0px;
+}
+.clearFloat {
+	clear: both;
+}
+.addLeavebtn {
+	position: absolute;
+    margin-left: 15px;
+}
+.marginLeft {
+	margin-left: 5px;
+}
+.floatLeft {
+	float: left;
+}
+span {
+	padding:30px;
+
+}
+label {
+	color: #4F7DA5;
+}
+.seperator {
+	background-color: grey;
+}

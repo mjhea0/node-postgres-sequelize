@@ -1,0 +1,34 @@
+
+html { 
+	overflow-y:scroll; 
+}
+
+body {
+	padding-top:50px; 
+}
+
+#todo-list { 
+	margin-bottom:30px; 
+}
+
+#todo-form { 
+	margin-bottom:50px; 
+}
+
+input {
+	border: none;
+}
+
+.doneClass {
+	text-decoration: line-through;
+	color: red;
+}
+
+.notDoneClass {
+	color: green;
+}
+
+.checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
+	position: static;
+    margin: 0px;
+}

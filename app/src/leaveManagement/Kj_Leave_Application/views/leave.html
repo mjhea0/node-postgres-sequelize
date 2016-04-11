@@ -1,0 +1,193 @@
+<div class="jumbotron round" ng-controller="EmpCtrl">
+
+	<h2 class="alignCenter"><b>My Personals</b></h2>
+
+	<hr class="seperator">
+<div ng-repeat="emp in employee | filter:employee.empCode">
+			<div class="row marginLeft">
+				<div class="col-md-3"><b>Emp Code:</b>
+					<label ng-model="emp.EmployeeId">{{emp.empCode}}</label>
+				</div>
+
+				<div class="col-md-3"><b>Employee Name</b>
+					<label>{{emp.empName}}</label>
+				</div>
+
+				<div class="col-md-3"><b>Login Name</b>
+					<label>{{emp.loginName}}</label>
+				</div>
+
+				<div class="col-md-3"><b>Joining Date:</b>
+					<label>{{emp.joinDate}}</label>
+				</div>
+			</div>
+
+			<div class="row marginLeft" style="margin-top: 20px">
+				<div>
+					<div class="col-md-3"><b>First Swipe:</b>
+						<label>{{emp.first_swipe}}</label>
+					</div>
+					<div class="col-md-3"><b>Last Swipe:</b>
+						<label>{{emp.latest_swipe}}</label>
+					</div>
+					<div class="col-md-3"><b>Available PL:</b>
+						<label>{{emp.empPlanLeave}}</label>
+					</div>
+					<div class="col-md-3"><b>Available UL:</b>
+						<label>{{emp.empUnplanLeave}}</label>
+					</div>
+				</div>
+			</div>
+
+
+	</div>
+
+		<hr class="seperator">
+		<button class="btn btn-info backBtn" type="submit" ng-click="approvedbtn=true">Check Approved Leaves</button>
+		<button class="btn btn-info addLeavebtn" type="submit" ng-click="showForm=true">Add New Leave</button>
+		<div>
+
+		<h2 class="alignCenter" style="margin-top: 15px;"><b style="padding-left: 128px">Apply Leave</b><span class="error">{{errMessage}}</span></h2>
+</div>
+
+		<hr class="seperator">
+		<div class="container" ng-show="approvedbtn">
+					<p class="bold">Present / Absent Request status</p>
+					<table class="table table-striped">
+					<thead>
+					  <tr>
+						<th>Type</th>
+						<th>From</th>
+						<th>To</th>
+						<th>Days</th>
+						<th>Approver</th>
+						<th>Status</th>
+						<th>Action</th>
+						<th>Details</th>
+					  </tr>
+					</thead>
+					<tbody>
+					  <tr ng-repeat="leaveDetails in leaveList">
+						<td align="center">{{leaveDetails.leaveType}}</td>
+						<td align="center">{{leaveDetails.startDate | date}}</td>
+						<td align="center">{{leaveDetails.endDate | date}}</td>
+						<td align="center">days</td>
+						<td align="center">{{leaveDetails.approver}}</td>
+						<td align="center">approved</td>
+						<td align="center"><a href="#"><span>Apply for Leave<br /> Cancellation</span></a></td>
+						<td align="center"></td>
+					  </tr>
+					</tbody>
+				  </table>
+				</div>
+		<form name="leaveForm" ng-show = "showForm" ng-submit="submitForm(emp)" novalidate>
+			<div class="row marginLeft marginBottom">
+				<div>
+					<div class="col-md-2"><b>Application type:</b>
+					</div>
+
+					<div class="col-md-2">
+						<label><input type="radio" ng-model="emp.leaveType" value="PL" ng-required="!leaveType" ng-change='floating()' />
+						<b>Planned leave</b></label>
+					</div>
+
+					<div class="col-md-2">
+						<label><input type="radio" ng-model="emp.leaveType" value="UL" ng-required="!leaveType" ng-change='floating()' />
+						<b>Unplanned leave</b></label>
+					</div>
+
+					<div class="col-md-2">
+						<label><input type="radio" ng-model="emp.leaveType" value="FH1" ng-required="!leaveType" ng-change='floating()' />
+						<b>FH 1 2016</b></label>
+					</div>
+
+					<div class="col-md-2">
+						<label><input type="radio" ng-model="emp.leaveType" value="FH2" ng-required="!leaveType" ng-change='floating()' />
+						<b>FH 2 2016</b></label>
+					</div>
+
+					<div class="col-md-2">
+						<label>
+							<select ng-model="floating_day" ng-disabled="!emp.floating_value"
+										ng-options="floatingList.date as floatingList.value for floatingList in floatingList"
+										ng-change = 'changefloating(floating_day)'>
+							</select>
+						</label>
+					</div>
+
+					<colspan class="seperator" style=" width:1px "></colspan>
+				</div>
+			</div>
+
+			<div class="row marginLeft marginBottom">
+				<div>
+					<div class="col-md-2">
+						<label>
+							<input type="checkbox" ng-model="check"><b style="color:#333" />  Recursive Half Leaves</b>
+						</label>
+					</div>
+
+					<div class="col-md-2">
+						<label>Start Date<input type="date" id="startDate" ng-model="emp.startDate"
+								ng-disabled="emp.floating_value" ng-change='setDateRange(startDate)' required  /></label>
+					</div>
+
+					<div class="col-md-2" ng-show="!check">
+						<label>
+							<input type="checkbox" ng-model="emp.isStartHalf" ng-change='checkhalf_day1(isStartHalf)' ng-disabled="emp.floating_value" /> Half Day
+  							<select ng-disabled="!emp.isStartHalf" ng-model="emp.startHalf" style="width: 130px; height: 26px">
+  								<option value="1">1st Half</option>
+  								<option value="2">2nd Half</option>
+  							</select>
+						</label>
+					</div>
+
+					<div class="col-md-2">
+						<label>End Date<input type="date" id="endDate" ng-disabled="emp.floating_value" ng-model="emp.endDate" ng-change='checkDateErr(startDate,endDate)' required /></label>
+					</div>
+
+					<div class="col-md-2">
+						<label>
+							<input type="checkbox" ng-model="emp.isEndHalf" ng-change='checkhalf_day2(isEndHalf)' ng-disabled="emp.floating_value" /> Half Day
+  							<select ng-disabled="!emp.isEndHalf" ng-model="emp.half_day2_value" style="width: 130px; height: 26px">
+									<option value="1">1st Half</option>
+  								<option value="2">2nd Half</option>
+  							</select>
+						</label>
+					</div>
+
+					<div class="col-md-2">
+						<label>
+							<b>             </b>
+						</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="row marginLeft">
+				<div>
+  						<div class="col-md-2">
+							<b>Personal Information</b>
+						</div>
+						<div class="col-md-2">
+							<label>Phone No.<input type="tel" placeholder="Phone Number" ng-model="emp.number" required /></label>
+						</div>
+
+						<div class="col-md-2">
+							<label>Residence<input type="text" placeholder="Residence Address" ng-model="emp.residence" required /></label>
+						</div>
+
+  						<div class="col-md-2">
+							<label>Reason<input type="text" placeholder="Reason for leave" ng-model="emp.reason" required /></label>
+						</div>
+
+						<div class="col-md-2 formbtn">
+							<button class="btn btn-info" value="Submit" ng-disabled="leaveForm.$invalid">Submit Application</button>
+						</div>
+						<div class="col-md-2 formbtn">
+							<button class="btn btn-info" ng-click="reset()" value="Clear">Reset Application</button>
+						</div>
+				</div>
+			</div>
+		</form>
+	</div>
