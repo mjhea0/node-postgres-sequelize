@@ -1,0 +1,44 @@
+[
+	{
+		"id": "41",
+		"name": "Room 1",
+		"details": "Details of Room 1",
+		"max_capacity": "10"
+	},
+	{
+		"id": "42",
+		"name": "Room 2",
+		"details": "Details of Room 2",
+		"max_capacity": "10"
+	},
+	{
+		"id": "43",
+		"name": "Room 3",
+		"details": "Details of Room 3",
+		"max_capacity": "10"
+	},
+	{
+		"id": "44",
+		"name": "Room 4",
+		"details": "Details of Room 4",
+		"max_capacity": "10"
+	},
+	{
+		"id": "45",
+		"name": "Room 5",
+		"details": "Details of Room 5",
+		"max_capacity": "10"
+	},
+	{
+		"id": "46",
+		"name": "Room 6",
+		"details": "Details of Room 6",
+		"max_capacity": "10"
+	},
+	{
+		"id": "47",
+		"name": "Room 7",
+		"details": "Details of Room 7",
+		"max_capacity": "10"
+	}
+]
