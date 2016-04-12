@@ -34,8 +34,8 @@ app.use('/bower_components', express.static(path.join(__dirname, '../bower_compo
 
 // *** main routes *** //
 app.use('/todo', todoRoutes);
-app.use('/roombooking', conferenceRoutes);
-app.use('/leaveManagement', leaveRoutes);
+app.use('/room-booking', conferenceRoutes);
+app.use('/leave-management', leaveRoutes);
 
 
 // catch 404 and forward to error handler

@@ -10,7 +10,7 @@ angular.module('myApp.controllers', ['myApp.services'])
 
 .controller('EmpCtrl', function($http,$scope,$filter,EmployeeService){
         $scope.empcode = EmployeeService.getEmployee();
-        $http.get("/leave/api/employee/").success(function(data,status,headers,config){
+        $http.get("leave-management/api/employee/").success(function(data,status,headers,config){
             $scope.employee = data;
             $scope.employee.empCode = $scope.empcode;
         }).error(function(data,status,headers,config){
@@ -23,7 +23,7 @@ angular.module('myApp.controllers', ['myApp.services'])
           console.log("Data Not Loaded");
     });
       $scope.leaveList = {};
-      $http.get('/leave/api/leaveList/' + $scope.empcode).success(function(data,status,headers,config){
+      $http.get('leave-management/api/leaveList/' + $scope.empcode).success(function(data,status,headers,config){
           $scope.leaveList = data;  n 
       }).error(function(data,status,headers,config){
           console.log("Data Not Loaded");
@@ -31,7 +31,7 @@ angular.module('myApp.controllers', ['myApp.services'])
 
       $scope.submitForm = function() { //Post reuest on submit form
         var res = $scope.emp;
-        $http.post('/leave/api/leave', res).success(function(res){
+        $http.post('leave-management/api/leave', res).success(function(res){
        }).error(function(){
          console.log('error');
        });
@@ -116,7 +116,7 @@ angular.module('myApp.controllers', ['myApp.services'])
 $scope.master = {};
  $scope.update = function(emp) {
 
-   $http.post("/leave/api/leave").success(function(data,status,headers,config){
+   $http.post("leave-management/api/leave").success(function(data,status,headers,config){
     $scope.employee = data;
    $scope.employee.empCode = $scope.empcode;
    }).error(function(data,status,headers,config){

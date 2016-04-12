@@ -5,6 +5,7 @@ var models = require('../models/index');
 var moment = require('moment');
 
 router.get('/', function(req, res, next) {
+	console.log('in booking..'+path.join(__dirname, './../../client'))
 	res.sendFile('index.html', { root : path.join(__dirname, './../../client')});
 });
 

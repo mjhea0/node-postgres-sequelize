@@ -3,11 +3,11 @@ var myApp = angular.module('myApp', ['ngRoute', 'myApp.controllers', 'myApp.serv
 myApp.config(function($routeProvider) {
     $routeProvider
         .when('/home', {
-            templateUrl: 'views/home.html',
+            templateUrl: 'leaveManagement/client/views/home.html',
             controller: 'LoginCtrl'
         })
         .when('/leave', {
-            templateUrl: 'views/leave.html',
+            templateUrl: 'leaveManagement/client/views/leave.html',
             controller: 'EmpCtrl'
         })
         .otherwise({

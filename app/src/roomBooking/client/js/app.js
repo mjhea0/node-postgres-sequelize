@@ -6,7 +6,7 @@ var confRoomBooking = angular.module('confRoomBooking', ['ngRoute'])
 
         $routeProvider
           .when('/roomBooking', {
-              templateUrl: 'client/views/main.tpl.html',
+              templateUrl: 'roomBooking/client/views/main.tpl.html',
               controller: 'confRoomCtrl'
           })
           .otherwise({
