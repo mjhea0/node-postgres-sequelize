@@ -9,9 +9,9 @@ var swig = require('swig');
 
 
 // *** routes *** //
-var todoRoutes = require('./../app/src/todo/server/routes/index.js');
-var conferenceRoutes = require('./../app/src/roomBooking/server/routes/index.js');
 var leaveRoutes = require('./../app/src/leaveManagement/server/routes/index.js');
+var conferenceRoutes = require('./../app/src/roomBooking/server/routes/index.js');
+var todoRoutes = require('./../app/src/todo/server/routes/index.js');
 
 // *** express instance *** //
 var app = express();
@@ -33,9 +33,9 @@ app.use('/bower_components', express.static(path.join(__dirname, '../bower_compo
 
 
 // *** main routes *** //
-app.use('/todo', todoRoutes);
-app.use('/roombooking', conferenceRoutes);
-app.use('/leaveManagement', leaveRoutes);
+app.use('/leave-management', leaveRoutes);
+app.use('/room-booking', conferenceRoutes);
+app.use('/todo-app', todoRoutes);
 
 
 // catch 404 and forward to error handler

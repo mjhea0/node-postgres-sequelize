@@ -1,16 +1,12 @@
-'use strict';
-
 var confRoomBooking = angular.module('confRoomBooking', ['ngRoute'])
-
     .config(['$routeProvider', function($routeProvider){
-
-        $routeProvider
-          .when('/roomBooking', {
-              templateUrl: 'client/views/main.tpl.html',
-              controller: 'confRoomCtrl'
+    	$routeProvider
+          .when('/home', {
+              templateUrl: 'roomBooking/client/views/main.tpl.html',
+              controller: 'confRoomCtrl',
+  	          reloadOnSearch: false
           })
           .otherwise({
-              redirectTo: '/roomBooking'
+              redirectTo: '/home'
           });
-
     }]);

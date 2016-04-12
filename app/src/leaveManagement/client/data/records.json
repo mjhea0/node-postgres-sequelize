@@ -1,0 +1,20 @@
+[{
+ "EmployeeId": 15007,
+ "empName": "Kinjal",
+ "loginName": "kinjalsh",
+ "joinDate": "20 Jul 2015",
+ "first_swipe": "10:52:49",
+ "latest_swipe": "17:59:18",
+ "empPlanLeave": 7,
+ "empUnplanLeave": 5
+},
+{
+  "EmployeeId": 15006,
+  "empName": "Kartik",
+  "loginName": "kartikd",
+  "joinDate": "20 Jul 2015",
+  "first_swipe": "10:52:49",
+  "latest_swipe": "17:59:18",
+  "empPlanLeave": 6,
+  "empUnplanLeave": 5
+  }]
