@@ -1,41 +1,56 @@
 angular.module('myApp.controllers', ['myApp.services'])
-.controller('LoginCtrl', function($http,$scope,$routeParams, $location, EmployeeService){
+.controller('LoginCtrl', function($http, $scope, $routeParams, $location, EmployeeService){
         $scope.login = function() {
-					EmployeeService.setEmployee($scope.emp.empCode);
+			EmployeeService.setEmployee($scope.emp.empCode);
         };
         $scope.auth = function(){
           $location.url('/leave');
         }
 })
 
-.controller('EmpCtrl', function($http,$scope,$filter,EmployeeService){
-        $scope.empcode = EmployeeService.getEmployee();
-        $http.get("leave-management/api/employee/").success(function(data,status,headers,config){
-            $scope.employee = data;
-            $scope.employee.empCode = $scope.empcode;
-        }).error(function(data,status,headers,config){
-            console.log("Data Not Loaded");
-      });
-      $scope.floatingList = {};
-      $http.get("/data/ft.json").success(function(data,status,headers,config){
-          $scope.floatingList = data;
-      }).error(function(data,status,headers,config){
-          console.log("Data Not Loaded");
-    });
-      $scope.leaveList = {};
-      $http.get('leave-management/api/leaveList/' + $scope.empcode).success(function(data,status,headers,config){
-          $scope.leaveList = data;  n 
-      }).error(function(data,status,headers,config){
-          console.log("Data Not Loaded");
-    });
+.controller('EmpCtrl', function($http, $scope, $filter, EmployeeService, leaveMgtFactory) {
+	
+    $scope.empcode = EmployeeService.getEmployee();
+    leaveMgtFactory.getEmployee()
+    	.then(function(data) {
+			$scope.employee = data;
+			$scope.employee.empCode = $scope.empcode;
+		},
+		function(error) {
+			console.log("Error occured!!!! " + JSON.stringify(error));
+		}
+	);  
+        
+    $scope.floatingList = {};
+    leaveMgtFactory.getFloatingLeaves()
+    	.then(function(data) {
+    		$scope.floatingList = data;
+		},
+		function(error) {
+			console.log("Error occured!!!! " + JSON.stringify(error));
+		}
+	);  
+    $scope.leaveList = {};
+    leaveMgtFactory.getEmployeeLeaves($scope.empcode)
+	  .then(function(data) {
+		  $scope.leaveList = data;
+	  },
+	  function(error) {
+		  console.log("Error occured!!!! " + JSON.stringify(error));
+	  }
+	);  
 
-      $scope.submitForm = function() { //Post reuest on submit form
-        var res = $scope.emp;
-        $http.post('leave-management/api/leave', res).success(function(res){
-       }).error(function(){
-         console.log('error');
-       });
-     };
+    $scope.submitForm = function() { //Post reuest on submit form
+    	var res = $scope.emp;
+    	leaveMgtFactory.applyLeave(res)
+  		.then(function(data) {
+  			console.log('Leave Applied Successfully');
+  		},
+  		function(error) {
+  			console.log("Error occured!!!! " + JSON.stringify(error));
+		}
+ 	);   
+};
 
 //Validations
 
@@ -114,7 +129,7 @@ angular.module('myApp.controllers', ['myApp.services'])
               }
           };
 $scope.master = {};
- $scope.update = function(emp) {
+/* $scope.update = function(emp) {
 
    $http.post("leave-management/api/leave").success(function(data,status,headers,config){
     $scope.employee = data;
@@ -125,6 +140,6 @@ $scope.master = {};
 
   $scope.master = angular.copy(emp);
   console.log("emp :" + emp);
- };
+ };*/
 
 });
