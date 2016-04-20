@@ -1,0 +1,219 @@
+<section id = "secTodoApp">
+    <article class="head">
+        <div style="display:inline-block">
+            <span>My Personals</span>
+            <label for="mySelect">Select Employee:</label>
+            <select name="mySelect" id="mySelect"
+                    ng-model="employee.empCode"
+                    ng-options="emp.empCode as emp.empCode for emp in employee"
+                    ng-change="getStoreData(employee.empCode)"></select>
+        </div>
+        <div style="float:right">
+            <span>FAQs</span>
+                    <span>image-minimise</span>
+                    <span>image-cross</span>
+        </div>
+        <div style="clear:both"></div>
+    </article>
+    <article class="emp_details">
+        <span style="padding-left:10px">Apply Leave</span>
+        <hr>
+        <div>
+            <div ng-repeat="emp in employee | filter:employee.empCode">
+                <div class="row col-md-12">
+                    <div class="pack3 col-md-6">
+                        <div class="col-md-3">
+                            <span class="bold">Emp Code:</span><br>
+                            <span>{{emp.empCode}}</span>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="bold">Employee Name:</span><br>
+                            <span>{{emp.empName}}</span>
+                        </div>
+                        <div class="col-md-6">
+                            <span></span><br>
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <div class="pack3 col-md-6">
+                        <div class="col-md-4">
+                            <span class="bold">Login Name:</span><br>
+                            <span>{{emp.loginName}}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="bold">Joining Date:</span><br>
+                            <span>{{emp.joinDate}}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <span></span><br>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-md-12">
+                    <div class="pack3 col-md-6">
+                        <div class="col-md-3">
+                            <span class="bold">First Swipe :</span><br>
+                            <span>{{emp.first_swipe}}</span>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="bold">Latest Swipe :</span><br>
+                            <span>{{emp.latest_swipe}}</span>
+                        </div>
+                        <div class="col-md-6">
+                            <span></span><br>
+                            <a href="#"><span>Check Log</span></a>
+                        </div>
+                    </div>
+                    <div class="pack3 col-md-6">
+                        <div class="col-md-4">
+                            <span class="bold">Available Planned<br>Leaves:-</span><br>
+                            <span>{{emp.empPlanLeave}}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="bold">Available Unplanned<br>Leaves:-	</span><br>
+                            <span>{{emp.empUnplanLeave}}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <span></span><br>
+                            <a href="#"><span>Check Approved Leaves</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </article>
+    <article>
+        <hr />
+		<div class="container">
+			<p class="bold">Present / Absent Request status</p>
+			<table class="table table-striped">
+			<thead>
+			  <tr>
+				<th>Type</th>
+				<th>From</th>
+				<th>To</th>
+				<th>Days</th>
+				<th>Approver</th>
+				<th>Status</th>
+				<th>Action</th>
+				<th>Details</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr ng-repeat="leaveDetails in leaveList">
+				<td align="center">{{leaveDetails.leaveType}}</td>
+				<td align="center">{{leaveDetails.startDate | date}}</td>
+				<td align="center">{{leaveDetails.endDate | date}}</td>
+				<td align="center">days</td>
+				<td align="center">{{leaveDetails.approver}}</td>
+				<td align="center">approved</td>
+				<td align="center"><a href="#"><span>Apply for Leave<br /> Cancellation</span></a></td>
+				<td align="center"></td>
+			  </tr>
+			</tbody>
+		  </table>
+		</div>
+		
+        <button ng-click="showme=true" style="margin-left:13px;margin-top:5px">Add New Leave</button>
+        <div ng-show="showme">
+            <div>
+                <span>Application Type:</span>
+                <div>
+                    <form name="myForm" novalidate>
+                        <div class="col-md-10 formEntries">
+                            <div class="col-md-2">
+                                <input type="radio" ng-model="user.leaveType" value="PL" ng-required="!leaveType" ng-change='floating()' />
+                                Planned Leave
+                            </div>
+		
+                            <div class="col-md-2">
+                                <input type="radio" ng-model="user.leaveType" value="UL" ng-required="!leaveType" ng-change='floating()' />
+                                Unplanned Leave
+                            </div>
+                            <div class="col-md-1">
+                                <input type="radio" ng-model="user.leaveType" value="FH" ng-required="!leaveType" ng-change='floating()' />
+                                FH 1
+                            </div>
+                            <div class="col-md-1">
+                                <input type="radio" ng-model="user.leaveType" value="FH" ng-required="!leaveType" ng-change='floating()' />
+                                FH 2
+                            </div>
+                            <div class="col-md-4">
+								<select ng-model="floating_day" ng-disabled="!user.floating_value"
+										ng-options="floatingList.date as floatingList.value for floatingList in floatingList"
+										ng-change = 'changefloating(floating_day)'>									
+									<option value="">---Please select---</option>
+								</select>
+                            </div>
+                        </div>
+                        <div class="col-md-12 formEntries">
+                            <input type="checkbox" ng-model="user.recHalfDay" ng-disabled="user.floating_value" /><span class="bold"> Recursive Half-Leaves:</span>
+                        </div>
+                        <div class="col-md-12 formEntries">
+                            <div class="col-md-2" style="margin-right: -23px;">
+                                <span>Start Date:</span><span class="error">*</span><br />
+                                <input type="date" id="startDate" ng-model="user.startDate" 
+								ng-disabled="user.floating_value" ng-change='setDateRange(startDate)' required />
+                            </div>
+							
+                            <div class="col-md-2" style="margin-right: -104px;">
+                                <span>Half Day:</span>
+                                <input type="checkbox" ng-model="user.isStartHalf" ng-change='checkhalf_day1(isStartHalf)' ng-disabled="user.floating_value" /><br />
+                                <select ng-disabled="!user.isStartHalf" ng-model="user.startHalf">
+                                    <option value="1">Ist half</option>
+                                    <option value="2">IInd half</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2" style="margin-right: -26px;">
+                                <span>End Date:</span><span class="error">*</span><br /><input type="date" id="endDate" ng-disabled="user.floating_value" ng-model="user.endDate" ng-change='changeDate(endDate)' required />
+                            </div>
+                            <div class="col-md-2" ng-show="!user.recHalfDay">
+                                <span>Half Day:</span>
+                                <input type="checkbox" ng-model="user.isEndHalf" ng-change='checkhalf_day2(isEndHalf)' ng-disabled="user.floating_value"/><br />
+                                <select ng-disabled="!user.isEndHalf" ng-model="user.half_day2_value">
+                                    <option value="1">Ist half</option>
+                                    <option value="2">IInd half</option>
+                                </select>
+
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                        </div>
+                        <div class="col-md-12 formEntries">
+                            <div class="col-md-3" style="margin-right: -125px;">
+                                <span class="bold">Phone No:</span><span class="error">*</span><br />
+                                <input type="tel" ng-model="user.phoneNo" required />
+                            </div>
+                            <div class="col-md-3" style="margin-right: -125px;">
+                                <span class="bold">Residence:</span><br />
+                                <input type="tel" ng-model="user.residence" />
+                            </div>
+                            <div class="col-md-3" style="margin-right: -40px;">
+                                <span class="bold">Others:</span><br />
+                                <input type="tel" ng-model="user.others" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 formEntries">
+                            <span class="bold">Reason:</span><span class="error">*</span><br /><br />
+                            <input style="width:44%" type="text" ng-model="user.reason" required /><br />
+                        </div>
+                        <div class="col-md-12 formEntries">
+                            <div>
+                                <input type="submit" ng-click="addLeave()" value="Submit" ng-disabled="myForm.$invalid" class="btn btn-default" />
+                                <input type="button" ng-click="reset()" value="Clear" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </form>
+                    <pre>user = {{user | json}}</pre>
+                </div>
+            </div>
+
+        </div>
+    </article>
+
+
+</section> <!-- @END/ section -->
