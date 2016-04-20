@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Conference Rooms Booking System</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/bower_components/foundation/css/normalize.min.css" />
+	<link rel="stylesheet" href="/bower_components/foundation/css/foundation.min.css" />
+	<link rel="stylesheet" href="roomBooking/client/css/style.css" />
+	
+</head>
+
+
+<body ng-app="confRoomBooking">
+
+	<div class="row collapse">
+
+		<!-- View template will be shown here -->
+	    <div class="row collapse" ng-view=""></div>
+
+	</div> <!-- @END/ row -->
+
+
+	<!-- JS -->
+	<script src="/bower_components/foundation/js/vendor/jquery.js"></script>
+	<script src="/bower_components/foundation/js/vendor/modernizr.js"></script>
+	<script src="/bower_components/foundation/js/vendor/fastclick.js"></script>
+	<script src="/bower_components/foundation/js/foundation.min.js"></script>
+	<script src="/bower_components/angular/angular.min.js"></script>
+	<script src="/bower_components/angular-route/angular-route.min.js"></script>
+
+	<!-- App JS -->
+	<script src="roomBooking/client/js/app.js"></script>
+	<script src="roomBooking/client/js/controllers/controller.js"></script>
+	<script src="roomBooking/client/js/services/service.js"></script>
+
+	<script>
+    	$(function(){
+    		$(document).foundation();
+    	});
+  	</script>
+
+</body>
+</html>

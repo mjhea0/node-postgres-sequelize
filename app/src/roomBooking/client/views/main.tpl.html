@@ -1,0 +1,160 @@
+<section id='confRooms'>
+	<h2>{{title}}</h2>
+
+	<h4>{{heading}}</h4>
+
+	<form name='searchForm' ng-submit='searchForm.$valid && searchRooms()' novalidate>
+		<div class='row collapse'>
+			<div class='columns small-12'>
+				<label class='field-name'>Location:<span class='required'>*</span></label>
+			</div>
+			<ul>
+				<li ng-repeat='loc in locations'>
+					<input type='checkbox' id='loc_{{loc.id}}' name='location' ng-click='checkAll(loc)' ng-model='loc.selected' ng-required='isLocation()'/><label for='loc_{{loc.id}}'>{{loc.name}}</label>
+				</li>
+			</ul>
+			<span class='error-message' ng-show='searchForm.$submitted'>
+				<span ng-show='searchForm.location.$error.required'>Location is required.</span>
+			</span>
+		</div>
+		<div class='divider'></div>
+
+		<div class='row collapse'>
+			<div class='columns small-12'>
+				<label class='field-name'>Facilities:</label>
+			</div>
+			<ul>
+				<li ng-repeat='facility in facilities'>
+					<input type='checkbox' id='{{facility.id}}' ng-click='isChecked($event, facility)' ng-model='facility.selected'/><label for='{{facility.id}}'>{{facility.name}}</label>
+				</li>
+			</ul>
+			<div class='divider'></div>
+		</div>
+
+		<div class='row collapse'>
+			<div class='columns small-3 right-spacing'>
+				<label class='field-name'>Capacity:</label>
+				<input type='number' id='capacity' min='1' max='20' ng-model='formData.capacity' />
+			</div>
+			<div class='columns small-3 right-spacing'>
+				<label class='field-name'>Purpose:<span class='required'>*</span></label>
+				<select id='purposes' ng-model='formData.purpose' required>
+					<option ng-repeat='purp in purposes' value='{{purp.id}}'>
+						{{purp.name}}
+					</option>
+				</select>
+			</div>
+			<div class='columns small-6'>
+				<label class='field-name'>Priority Facilities:</label>
+				<select id='priority1Facility' class='priority-select' ng-model='formData.priority1Facility'>
+					<option value=''>Select Facility-1</option>
+					<option ng-repeat='priority in priorityFacilities' value='{{priority.id}}'>
+						{{priority.name}}
+					</option>
+				</select>
+				<select id='priority2Facility' class='priority-select' ng-model='formData.priority2Facility'>
+					<option value=''>Select Facility-2</option>
+					<option ng-repeat='priority in priorityFacilities' value='{{priority.id}}'>
+						{{priority.name}}
+					</option>
+				</select>
+			</div>
+		</div>
+
+		<div class='row collapse'>
+			<div class='columns small-3 right-spacing'>
+				<label class='field-name'>Date:<span class='required'>*</span></label>
+				<input type='text' name='dateValue' ng-model='formData.dateValue' required/>
+				<span class='error-message' ng-show='searchForm.$submitted || searchForm.dateValue.$dirty'>
+					<span ng-show='searchForm.dateValue.$error.required'>Date is required.</span>
+				</span>
+			</div>
+			<div class='columns small-3 right-spacing'>
+				<label class='field-name'>Time:<span class='required'>*</span></label>
+				<div class='row collapse'>
+					<div class='columns small-4'>
+						<select id='timeHours' ng-model='formData.timeHours'>
+							<option value='1'>1</option><option value='2'>2</option><option value='3'>3</option>
+							<option value='4'>4</option><option value='5'>5</option><option value='6'>6</option>
+							<option value='7'>7</option><option value='8'>8</option><option value='9'>9</option>
+							<option value='10'>10</option><option value='11'>11</option><option value='12'>12</option>
+						</select>
+					</div>
+					<div class='columns small-4'>
+						<select id='timeMinutes' ng-model='formData.timeMinutes'>
+							<option value='00'>00</option><option value='15'>15</option>
+							<option value='30'>30</option><option value='45'>45</option>
+						</select>
+					</div>
+					<div class='columns small-4'>
+						<select id='timeCycle' ng-model='formData.timeCycle'>
+							<option value='AM'>AM</option>
+							<option value='PM'>PM</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class='columns small-6'>
+				<label class='field-name'>Duration:<span class='required'></span></label>
+				<select id='durationHours' class='duration-select' ng-model='formData.durationHours'>
+					<option value='0'>0</option><option value='1'>1</option><option value='2'>2</option>
+					<option value='3'>3</option><option value='4'>4</option><option value='5'>5</option>
+					<option value='6'>6</option><option value='7'>7</option><option value='8'>8</option>
+					<option value='9'>9</option><option value='10'>10</option>
+				</select><span class='field-label'>Hour(s)</span>
+				<select id='durationMinutes' class='duration-select' ng-model='formData.durationMinutes'>
+					<option value='00'>00</option><option value='15'>15</option>
+					<option value='30'>30</option><option value='45'>45</option>
+				</select><span class='field-label'>Min(s)</span>
+			</div>
+		</div>
+
+		<div class='row collapse'>
+			<div class='columns small-3'>
+				<label class='field-name'>Subject For New Meeting:<span class='required'>*</span></label>
+			</div>
+			<div class='columns small-3 right-spacing'>
+				<input type='text' name='meetingSubject' ng-model='formData.meetingSubject' required />
+				<span class='error-message' ng-show='searchForm.$submitted || searchForm.meetingSubject.$touched'>
+					<span ng-show='searchForm.meetingSubject.$error.required'>Meeting subject is required.</span>
+				</span>
+			</div>
+			<div class='columns small-6'>
+				<button ng-click='searchForm.$valid && searchRooms()' ng-disabled='showSearchResult'>Search</button>
+				<button ng-click='cancelSearch()' ng-disabled='!showSearchResult'>Cancel</button>
+				<button ng-click='showOccupancy()'>Show Occupancy</button>
+			</div>
+		</div>
+		<div class='divider'></div>
+	</form>
+</section>
+
+<section ng-class="{'search-result':showSearchResult}" ng-show='showSearchResult'>
+		<div ng-show='roomsAvailable'>
+				<label><b>Search Result:</b></label>
+				<table class='rooms-list'>
+					<thead>
+						<tr>
+							<th>Select</th>
+							<th>Room</th>
+							<th>Details</th>
+							<th>Max Capacity</th>
+							<th>-</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='room in searchResult'>
+							<td><input type='checkbox' ng-model='room.selected' name='roomSelect' /></td>
+							<td>{{room.name}}</td>
+							<td>{{room.details}}</td>
+							<td>{{room.max_capacity}}</td>
+							<td><a href='#' ng-click='bookRoom(room)'>Book Now</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<a href='#' ng-click='bookMultiRooms()' ng-class="{'disabled-link': checkMultiRooms()}">Book Rooms</a>
+		</div>
+		<div ng-show='!roomsAvailable'>
+				<label><b>No room is available for given search</b></label>
+		</div>
+</section>

@@ -1,0 +1,19 @@
+[{
+	"emp_code": "15006",
+	"emp_name": "Kartik",
+	"emp_login": "kartikd",
+	"emp_joining": "20 Jul 2015",
+	"first_swipe": "10:52:49",
+	"latest_swipe": "17:59:18",
+	"available_pl": "7",
+	"available_ul": "5"
+}, {
+	"emp_code": "15007",
+	"emp_name": "Kinjal",
+	"emp_login": "Kinjalsh",
+	"emp_joining": "20 Jul 2015",
+	"first_swipe": "10:52:49",
+	"latest_swipe": "17:59:18",
+	"available_pl": "5",
+	"available_ul": "5"
+}]

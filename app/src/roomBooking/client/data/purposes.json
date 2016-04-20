@@ -1,0 +1,30 @@
+[
+	{
+		"id": "31",
+		"name": "Appraisal Meeting"
+	},
+	{
+		"id": "32",
+		"name": "Client Call"
+	},
+	{
+		"id": "33",
+		"name": "Client Visit"
+	},
+	{
+		"id": "34",
+		"name": "Interview"
+	},
+	{
+		"id": "35",
+		"name": "Team Meeting"
+	},
+	{
+		"id": "36",
+		"name": "Training"
+	},
+	{
+		"id": "37",
+		"name": "Video Conference"
+	}
+]

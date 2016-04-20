@@ -1,27 +1,22 @@
-/**
- * Module Dependencies
- */
-
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var nodemon = require('gulp-nodemon');
 
-
-/**
- * Config
- */
-
 var paths = {
   styles: [
-    './client/css/*.css',
+    './app/src/todo/client/css/*.css',
+    './app/src/roomBooking/client/css/*.css',
+    './app/src/leaveManagement/client/css/*.css',
   ],
   scripts: [
-    './client/js/*.js',
+	'./app/src/todo/client/js/*.js',
+	'./app/src/roomBooking/client/js/*.js',
+	'./app/src/leaveManagement/client/js/*.js',
   ],
   server: [
-    './server/bin/www'
+    './appServer/bin/www'
   ]
 };
 
@@ -31,10 +26,6 @@ var nodemonConfig = {
   ignore: ['node_modules']
 };
 
-
-/**
- * Gulp Tasks
- */
 
 gulp.task('lint', function() {
   return gulp.src(paths.scripts)
