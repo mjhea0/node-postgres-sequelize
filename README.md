@@ -1,4 +1,4 @@
-# Test Driven Development With Node, Postgres, and Knex (Red/Green/Refactor)
+# Node, Postgres, and Sequelize
 
 ## Want to learn how to build this project?
 
